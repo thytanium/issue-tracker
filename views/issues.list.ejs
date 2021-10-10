@@ -4,8 +4,9 @@
   <thead>
     <tr>
       <th>Title</th>
-      <th>Comment</th>
+      <th width="33%">Comment</th>
       <th>Status</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -14,6 +15,9 @@
       <td><%= issue.title %></td>
       <td><%= issue.comment %></td>
       <td><%= issue.status %></td>
+      <td>
+        <a href="/edit/<%= issue.id %>" class="btn btn-secondary">Edit</a>
+      </td>
     </tr>
     <% }) %>
   </tbody>
