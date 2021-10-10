@@ -1,5 +1,8 @@
 <%- include('layout/header.ejs') -%>
 <a href="/create" class="btn btn-primary">Create</a>
+<% if (messages) { messages.forEach(message => { %>
+<div class="alert alert-success"><%= message %></div>
+<% })} %>
 <table class="table">
   <thead>
     <tr>

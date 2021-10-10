@@ -25,10 +25,9 @@ app.use(flash());
 
 app.get("/", async (req, res) => {
   await mongoose.connect(config.mongodb.uri);
-
   const issues = await Issue.find({});
-
-  res.render("issues.list.ejs", { issues });
+  const messages = req.flash("messages");
+  res.render("issues.list.ejs", { issues, messages });
 });
 
 app.get("/create", showCreateOrEditIssue);
@@ -38,6 +37,7 @@ app.post("/edit/:id", createOrUpdateIssue);
 app.post("/delete/:id", async (req, res) => {
   await mongoose.connect(config.mongodb.uri);
   await Issue.deleteOne({ _id: req.params.id });
+  req.flash("messages", "The issue was deleted succesfully");
   res.redirect("/");
 });
 

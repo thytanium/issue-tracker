@@ -25,7 +25,9 @@ module.exports = async function createOrUpdateIssue(req, res) {
 
   if (req.params.id) {
     await Issue.findOneAndUpdate({ _id: req.params.id }, req.body);
+    req.flash("messages", "The issue was updated successfully");
   } else {
+    req.flash("messages", "An issue has been successfully created");
     await Issue.create(req.body);
   }
 
