@@ -17,9 +17,27 @@
       <td><%= issue.status %></td>
       <td>
         <a href="/edit/<%= issue.id %>" class="btn btn-secondary">Edit</a>
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-delete-issue-id="<%= issue.id %>"
+        >
+          Delete
+        </button>
       </td>
     </tr>
     <% }) %>
   </tbody>
 </table>
+<script>
+  document.querySelectorAll("[data-delete-issue-id]").forEach((node) => {
+    node.addEventListener("click", (event) => {
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = `/delete/${event.target.dataset.deleteIssueId}`;
+      document.body.appendChild(form);
+      form.submit();
+    });
+  });
+</script>
 <%- include('layout/footer.ejs') -%>

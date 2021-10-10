@@ -35,6 +35,11 @@ app.get("/create", showCreateOrEditIssue);
 app.post("/create", createOrUpdateIssue);
 app.get("/edit/:id", showCreateOrEditIssue);
 app.post("/edit/:id", createOrUpdateIssue);
+app.post("/delete/:id", async (req, res) => {
+  await mongoose.connect(config.mongodb.uri);
+  await Issue.deleteOne({ _id: req.params.id });
+  res.redirect("/");
+});
 
 app.listen(config.port, () => {
   console.log(`Listening on port ${config.port}`);
