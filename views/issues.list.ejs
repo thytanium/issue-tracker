@@ -32,6 +32,10 @@
 <script>
   document.querySelectorAll("[data-delete-issue-id]").forEach((node) => {
     node.addEventListener("click", (event) => {
+      if (!confirm("Are you sure?")) {
+        return;
+      }
+
       const form = document.createElement("form");
       form.method = "POST";
       form.action = `/delete/${event.target.dataset.deleteIssueId}`;
